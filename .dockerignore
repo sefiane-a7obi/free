@@ -1,0 +1,5 @@
+jobs_data/
+__pycache__/
+*.pyc
+.git/
+test_*.py
