@@ -195,7 +195,10 @@ def run_dump_worker(job_id: str):
         if not out_str.endswith(os.sep):
             out_str += os.sep
 
-        if sys.platform != "win32" and str(dumper_to_use).endswith(".exe"):
+        dumper_dll = BIN_DIR / "SEFIANE_STORE_Dumper.dll"
+        if dumper_dll.exists():
+            cmd = ["dotnet", str(dumper_dll), str(lib_path), str(meta_path), out_str]
+        elif sys.platform != "win32" and str(dumper_to_use).endswith(".exe"):
             cmd = ["wine", str(dumper_to_use), str(lib_path), str(meta_path), out_str]
         else:
             cmd = [str(dumper_to_use), str(lib_path), str(meta_path), out_str]
