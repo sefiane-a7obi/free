@@ -1,5 +1,8 @@
 import os
 import sys
+
+# Ensure .NET runs without ICU dependency on Linux containers
+os.environ["DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"] = "1"
 import gzip
 import uuid
 import time
