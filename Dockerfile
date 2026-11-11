@@ -1,9 +1,14 @@
 FROM python:3.11-slim
 
-# Install official Microsoft .NET 9 Runtime for Linux
+# Install official Microsoft .NET 9 Runtime for Linux & libicu
 COPY --from=mcr.microsoft.com/dotnet/runtime:9.0 /usr/share/dotnet /usr/share/dotnet
 ENV DOTNET_ROOT=/usr/share/dotnet
 ENV PATH=$PATH:/usr/share/dotnet
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends libicu-dev ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
