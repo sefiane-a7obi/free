@@ -21,13 +21,15 @@ ASSETS_DIR = STATIC_DIR / "assets"
 BIN_DIR = BASE_DIR / "bin"
 JOBS_DIR = BASE_DIR / "jobs_data"
 
-SEFIANE_DUMPER = BIN_DIR / "SEFIANE_STORE_Dumper.exe"
-if not SEFIANE_DUMPER.exists():
-    linux_bin = BIN_DIR / "SEFIANE_STORE_Dumper"
-    if linux_bin.exists():
-        SEFIANE_DUMPER = linux_bin
-    else:
-        SEFIANE_DUMPER = Path(r"C:\Users\sefaine\Documents\Projects\SEFIANE_STORE_Dumper_v2\SEFIANE_STORE_Dumper_v2\single_exe\SEFIANE STORE Dumper.exe")
+# Find dumper executable in bin directory
+candidates = [
+    BIN_DIR / "SEFIANE STORE Dumper.exe",
+    BIN_DIR / "SEFIANE_STORE_Dumper.exe",
+    BIN_DIR / "SEFIANE_STORE_Dumper",
+    BIN_DIR / "SEFIANE STORE Dumper",
+    Path(r"C:\Users\sefaine\Documents\Projects\SEFIANE_STORE_Dumper_v2\SEFIANE_STORE_Dumper_v2\Il2CppDumper\bin\Release\net9.0-windows\win-x64\SEFIANE STORE Dumper.exe"),
+]
+SEFIANE_DUMPER = next((c for c in candidates if c.exists()), BIN_DIR / "SEFIANE STORE Dumper.exe")
 
 OFFICIAL_DUMPER = BIN_DIR / "Il2CppDumper.exe"
 
