@@ -1,21 +1,11 @@
 FROM python:3.11-slim
 
-# Install Wine for running the SEFIANE STORE Dumper engine
-RUN dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends \
-        wine \
-        wine64 \
-        ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+# Install official Microsoft .NET 9 Runtime for Linux
+COPY --from=mcr.microsoft.com/dotnet/runtime:9.0 /usr/share/dotnet /usr/share/dotnet
+ENV DOTNET_ROOT=/usr/share/dotnet
+ENV PATH=$PATH:/usr/share/dotnet
 
 WORKDIR /app
-
-ENV WINEDEBUG=-all
-ENV WINEPREFIX=/root/.wine
-ENV XDG_RUNTIME_DIR=/tmp/runtime-root
-
-RUN mkdir -p /tmp/runtime-root && chmod 700 /tmp/runtime-root
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
