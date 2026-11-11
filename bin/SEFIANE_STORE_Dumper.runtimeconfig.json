@@ -6,6 +6,9 @@
       "version": "9.0.0"
     },
     "configProperties": {
+      "System.GC.Server": false,
+      "System.GC.Concurrent": true,
+      "System.GC.HeapHardLimit": 367001600,
       "System.Globalization.Invariant": true,
       "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
