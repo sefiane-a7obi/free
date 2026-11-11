@@ -5,11 +5,7 @@ COPY --from=mcr.microsoft.com/dotnet/runtime:9.0 /usr/share/dotnet /usr/share/do
 ENV DOTNET_ROOT=/usr/share/dotnet
 ENV PATH=$PATH:/usr/share/dotnet
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
-
-# Low-memory GC configuration for 512MB RAM containers
 ENV DOTNET_gcServer=0
-ENV DOTNET_GCHeapHardLimit=0x15E00000
-ENV DOTNET_GCLargeObjectHeapCompactionMode=1
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends libicu-dev ca-certificates && \

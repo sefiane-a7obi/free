@@ -4,8 +4,6 @@ import sys
 # Ensure .NET runs without ICU dependency on Linux containers
 os.environ["DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"] = "1"
 os.environ["DOTNET_gcServer"] = "0"
-os.environ["DOTNET_GCHeapHardLimit"] = "0x15E00000"
-os.environ["DOTNET_GCLargeObjectHeapCompactionMode"] = "1"
 import gzip
 import uuid
 import time
